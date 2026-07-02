@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Slider</title>
+  <style>
+    /* Your exact CSS */
+    .container4 {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      justify-content: center; /* Centers it on screen */
+      margin-top: 50px;
+    }
+
+    .arrow {
+      height: 80px; 
+      cursor: pointer;
+      user-select: none; /* Prevents highlighting the arrow on double click */
+    }
+
+    .frame {
+      width: 800px; 
+      height: 500px;
+      overflow: hidden;
+      box-shadow: -1px 1px 10px rgba(0, 0, 0, 0.15); 
+    }
+
+    .slider10 {
+      display: flex;
+      transition: transform 0.5s ease-in-out; 
+    }
+
+    .imgslide1 {
+      width: 800px; 
+      height: 500px;
+      object-fit: cover;
+      flex-shrink: 0; 
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container4">
+    <img src="left-arrow.png" class="arrow left" alt="Left Arrow">
+    
+    <div class="frame">
+      <div class="slider10">
+        <img src="logo 11.jpg" class="imgslide1" alt="Slide 1"> 
+        <img src="logo 2.jpg" class="imgslide1" alt="Slide 2"> 
+        <img src="logo12.jpg" class="imgslide1" alt="Slide 3"> 
+        <img src="logo 11.jpg" class="imgslide1" alt="Slide 4"> 
+        <img src="logo 11.jpg" class="imgslide1" alt="Slide 5"> 
+      </div>
+    </div>
+
+    <img src="right-arrow (1).png" class="arrow right" alt="Right Arrow">
+  </div>
+
+  <script>
+    const leftArrow = document.querySelector('.arrow.left');
+    const rightArrow = document.querySelector('.arrow.right');
+    const slider = document.querySelector('.slider10');
+    const images = document.querySelectorAll('.imgslide1');
+
+    let sliderNumber = 0; 
+    const slideWidth = 800; 
+
+    // Safety check: only run if buttons exist
+    if (leftArrow && rightArrow && slider) {
+      rightArrow.addEventListener('click', () => {
+        if (sliderNumber < images.length - 1) {
+          sliderNumber++;
+        } else {
+          sliderNumber = 0; 
+        }
+        slider.style.transform = `translateX(-${sliderNumber * slideWidth}px)`;
+      });
+
+      leftArrow.addEventListener('click', () => {
+        if (sliderNumber > 0) {
+          sliderNumber--;
+        } else {
+          sliderNumber = images.length - 1; 
+        }
+        slider.style.transform = `translateX(-${sliderNumber * slideWidth}px)`;
+      });
+    } else {
+      console.error("Could not find the slider elements. Check your classes.");
+    }
+  </script>
+</body>
+</html>
